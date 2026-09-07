@@ -383,7 +383,7 @@ function generateShareText() {
         });
 
 
-    return `Codele ${gameNumber.textContent} ${attempts}/6
+    return `What's the Output ${gameNumber.textContent} ${attempts}/6
 
 ${result.join("\n")}
 
