@@ -2,7 +2,23 @@
 // TODAY'S DATE
 // =========================
 
-const today = new Date().toISOString().split("T")[0];
+
+function getToday() {
+
+    const date = new Date();
+
+    const year = date.getFullYear();
+
+    const month =
+        String(date.getMonth() + 1).padStart(2, "0");
+
+    const day =
+        String(date.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+}
+
+const today = getToday();
 
 
 // =========================
@@ -142,7 +158,7 @@ if (!todayQuestion) {
 // ADD RESPONSE TO HISTORY
 // =========================
 
-function addResponse(answer) {
+function addResponse(answer, correct) {
 
     const response =
         document.createElement("div");
@@ -154,9 +170,63 @@ function addResponse(answer) {
         <span>${answer}</span>
     `;
 
+    if (correct) {
+
+        response.style.backgroundColor =
+            "green";
+
+    } else {
+
+        response.style.backgroundColor =
+            "red";
+
+    }
+
     userResponses.appendChild(response);
 
     return response;
+}
+
+
+// =========================
+// RESTORE RESPONSE HISTORY
+// =========================
+
+function restoreResponses() {
+
+    const savedAnswers =
+        localStorage.getItem(
+            `output-answers-${today}`
+        );
+
+    if (!savedAnswers) {
+        return;
+    }
+
+    const savedUserAnswers =
+        JSON.parse(savedAnswers);
+
+
+    savedUserAnswers.forEach(answer => {
+
+        userAnswers.push(answer);
+
+        const isCorrect =
+            answer === todayQuestion.answer;
+
+        addResponse(
+            answer,
+            isCorrect
+        );
+
+    });
+
+
+    attempts =
+        savedUserAnswers.length;
+
+    attemptsDisplay.textContent =
+        attempts;
 }
 
 
@@ -202,19 +272,32 @@ function checkAnswer() {
     );
 
 
+    // Save answers to localStorage
+
+    localStorage.setItem(
+        `output-answers-${today}`,
+        JSON.stringify(userAnswers)
+    );
+
+
+    // Check if answer is correct
+
+    const isCorrect =
+        userAnswer === todayQuestion.answer;
+
     // Display answer in history
 
-    const response =
-        addResponse(userAnswer);
+    addResponse(
+        userAnswer,
+        isCorrect
+    );
 
 
     // =========================
     // CORRECT ANSWER
     // =========================
 
-    if (
-        userAnswer === todayQuestion.answer
-    ) {
+    if (isCorrect) {
 
         solved = true;
 
@@ -224,12 +307,6 @@ function checkAnswer() {
 
         feedback.className =
             "answer-feedback correct";
-
-
-        // Turn correct response green
-
-        response.style.backgroundColor =
-            "green";
 
 
         // Disable game
@@ -242,12 +319,12 @@ function checkAnswer() {
         // Save today's completed game
 
         localStorage.setItem(
-            `solved-${today}`,
+            `output-solved-${today}`,
             "true"
         );
 
         localStorage.setItem(
-            `attempts-${today}`,
+            `output-attempts-${today}`,
             attempts
         );
 
@@ -287,7 +364,7 @@ function checkAnswer() {
             feedback.textContent =
                 `✕ Out of attempts. The answer was ${todayQuestion.answer}`;
 
-
+            feedback.className = "answer-feedback incorrect";
             // Disable game
 
             answerInput.disabled = true;
@@ -297,15 +374,9 @@ function checkAnswer() {
 
             // Save today's completed game
 
-            localStorage.setItem(
-                `solved-${today}`,
-                "true"
-            );
+            localStorage.setItem(`output-solved-${today}`,"true");
 
-            localStorage.setItem(
-                `attempts-${today}`,
-                attempts
-            );
+            localStorage.setItem(`output-attempts-${today}`,attempts);
 
 
             // Show popup
@@ -462,22 +533,35 @@ answerInput.addEventListener(
 
 
 // =========================
-// RESTORE COMPLETED GAME
+// RESTORE GAME
 // =========================
 
 window.onload = function () {
-    if (!todayQuestion) {return;}
 
-    const alreadySolved = localStorage.getItem(`solved-${today}`);
+    if (!todayQuestion) {
+        return;
+    }
+
+
+    // Restore previous answers
+
+    restoreResponses();
+
+
+    // Check if today's game is completed
+    const alreadySolved =
+        localStorage.getItem(
+            `output-solved-${today}`
+        );
+
 
     if (alreadySolved === "true") {
-        const savedAttempts = localStorage.getItem(`attempts-${today}`);
-
+        const savedAttempts = localStorage.getItem(`output-attempts-${today}`);
         solved = true;
 
         answerInput.disabled = true;
         submitButton.disabled = true;
 
-        displayPopup("Completed!", savedAttempts);
+        displayPopup("Completed!",savedAttempts);
     }
 };
