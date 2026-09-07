@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Codele — What's the Output?</title>
+    <meta name="description" content="Play a new coding challenge every day.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+    <!-- Background decoration -->
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
+
+    <!-- Navigation -->
+    <header class="navbar">
+        <a href="#" class="logo">
+            <span class="logo-mark">&lt;/&gt;</span>
+            <span>codele</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="../index.html">Games</a>
+        </nav>
+
+        <div class="nav-right">
+            <div class="streak">
+                <span class="streak-icon">🔥</span>
+                <span id="streak-count"></span>
+            </div>
+
+            <button class="stats-button" aria-label="View statistics">
+                Stats
+            </button>
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- Hero -->
+        <section class="hero">
+
+            <div class="date-pill">
+                <span class="live-dot"></span>
+                <span id="date">September 7, 2026</span>
+            </div>
+
+            <h1>What's the Output?</h1>
+
+            <p class="hero-subtitle">
+                Guess what the code snippet outputs.
+            </p>
+
+        </section>
+
+        <section class="output-game">
+
+            <div class="code-card">
+
+                <div class="code-header">
+                    <span class="code-language" id="code-language"></span>
+
+                    <div class="code-dots">
+                        <span class="code-dot"></span>
+                        <span class="code-dot"></span>
+                        <span class="code-dot"></span>
+                    </div>
+                </div>
+
+                <div class="code-content">
+                    <pre id="code-content"></pre>
+                </div>
+
+            </div>
+
+
+            <div class="output-question">
+
+                <h2>What does this code output?</h2>
+
+                <p>Enter the exact output.</p>
+
+                <div class="answer-area">
+
+                    <input
+                        type="text"
+                        class="answer-input"
+                        id="answer-input"
+                        placeholder="Your answer..."
+                        autocomplete="off"
+                    >
+
+                    <button class="submit-button" id="submit-button">
+                        Submit
+                    </button>
+
+                </div>
+
+                <div class="answer-feedback" id="answer-feedback"></div>
+
+                <div class="game-info">
+                    <span>ATTEMPTS: <span id="attempts">0</span>/6</span>
+                    <span>CODELE <span id="game-number"></span></span>
+                </div>
+
+            </div>
+        
+            <div class="user-responses" id="user-responses"></div>
+
+        </section>
+
+        <div class="overlay" id="popupOverlay">
+
+            <div class="popup">
+
+                <button onclick="closePopup()">&times;</button>
+                <h2 id="popup-title"></h2>
+                <span>CODELE <span id="popup-game-number"></span></span>
+                <span>ATTEMPTS: <span id="popup-attempts">0</span>/6</span>
+
+                <button id="share-button" class="popup-button">Share Results</button>
+                <a href="../index.html" class="popup-button">Back to Games</a>
+
+            </div>
+        </div>
+
+
+        
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+
+        <div class="logo">
+            <span class="logo-mark">&lt;/&gt;</span>
+            <span>codele</span>
+        </div>
+
+        <p>
+            One coding challenge. Every day.
+        </p>
+
+        <span class="footer-year">
+            © 2026 Codele
+        </span>
+
+    </footer>
+
+
+    <script src="../output.js"></script>
+
+</body>
+</html>

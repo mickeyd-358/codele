@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Codele — Daily Coding Games</title>
+    <meta name="description" content="Play a new coding challenge every day.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../codele/style.css">
+</head>
+
+<body>
+
+    <!-- Background decoration -->
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
+
+    <!-- Navigation -->
+    <header class="navbar">
+        <a href="#" class="logo">
+            <span class="logo-mark">&lt;/&gt;</span>
+            <span>codele</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="#games">Games</a>
+            <a href="#how-it-works">How it works</a>
+        </nav>
+
+        <div class="nav-right">
+            <div class="streak">
+                <span class="streak-icon">🔥</span>
+                <span id="streak-count"></span>
+            </div>
+
+            <button class="stats-button" aria-label="View statistics">
+                Stats
+            </button>
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- Hero -->
+        <section class="hero">
+
+            <div class="date-pill">
+                <span class="live-dot"></span>
+                September 7, 2026
+            </div>
+
+            <h1>
+                Code a little.<br>
+                <span>Every day.</span>
+            </h1>
+
+            <p class="hero-subtitle">
+                Daily coding games designed to test how well you really know your code.
+            </p>
+
+            <div class="hero-meta">
+                <div>
+                    <strong>4</strong>
+                    <span>games</span>
+                </div>
+
+                <div class="meta-divider"></div>
+
+                <div>
+                    <strong>∞</strong>
+                    <span>ways to improve</span>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- Games -->
+        <section class="games-section" id="games">
+
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">TODAY'S CHALLENGES</p>
+                    <h2>Pick your game.</h2>
+                </div>
+
+                <p class="section-description">
+                    Same challenges for everyone.<br>
+                    New ones every day.
+                </p>
+            </div>
+
+
+            <div class="games-grid">
+
+                <!-- Debug -->
+                <article
+                    class="game-card featured"
+                    data-game="debug"
+                >
+                    <div class="card-top">
+                        <div class="game-icon debug-icon">
+                            🐛
+                        </div>
+
+                        <span class="difficulty medium">
+                            MEDIUM
+                        </span>
+                    </div>
+
+                    <div class="card-content">
+                        <h3>Debug It</h3>
+
+                        <p>
+                            Something is broken. Find the bug and fix the code.
+                        </p>
+                    </div>
+
+                    <div class="card-bottom">
+                        <span class="play-time">~ 2 min</span>
+
+                        <button class="arrow-button" aria-label="Play Debug It">
+                            →
+                        </button>
+                    </div>
+                </article>
+
+
+                <!-- One Line -->
+                <article
+                    class="game-card"
+                    data-game="one-line"
+                >
+                    <div class="card-top">
+                        <div class="game-icon line-icon">
+                            ⚡
+                        </div>
+
+                        <span class="difficulty hard">
+                            HARD
+                        </span>
+                    </div>
+
+                    <div class="card-content">
+                        <h3>One Line</h3>
+
+                        <p>
+                            Solve the challenge using one line of code.
+                        </p>
+                    </div>
+
+                    <div class="card-bottom">
+                        <span class="play-time">~ 3 min</span>
+
+                        <button class="arrow-button" aria-label="Play One Line">
+                            →
+                        </button>
+                    </div>
+                </article>
+
+
+                <!-- Output -->
+                <article
+                    class="game-card"
+                    data-game="output"
+                >
+                    <div class="card-top">
+                        <div class="game-icon output-icon">
+                            &gt;_
+                        </div>
+
+                        <span class="difficulty easy">
+                            EASY
+                        </span>
+                    </div>
+
+                    <div class="card-content">
+                        <h3>What's the Output?</h3>
+
+                        <p>
+                            Read the code. Predict exactly what it will output.
+                        </p>
+                    </div>
+
+                    <div class="card-bottom">
+                        <span class="play-time">~ 1 min</span>
+
+                        <button class="arrow-button" aria-label="Play What's the Output">
+                            →
+                        </button>
+                    </div>
+                </article>
+
+
+                <!-- Puzzle -->
+                <article
+                    class="game-card"
+                    data-game="puzzle"
+                >
+                    <div class="card-top">
+                        <div class="game-icon puzzle-icon">
+                            ◈
+                        </div>
+
+                        <span class="difficulty hard">
+                            HARD
+                        </span>
+                    </div>
+
+                    <div class="card-content">
+                        <h3>Code Puzzle</h3>
+
+                        <p>
+                            Think like a programmer. Work out the solution.
+                        </p>
+                    </div>
+
+                    <div class="card-bottom">
+                        <span class="play-time">~ 4 min</span>
+
+                        <button class="arrow-button" aria-label="Play Code Puzzle">
+                            →
+                        </button>
+                    </div>
+                </article>
+
+            </div>
+
+
+            <!-- Selected game -->
+            <div class="selected-game" id="selected-game">
+
+                <div class="selected-game-left">
+                    <div class="selected-icon" id="selected-icon">🐛</div>
+
+                    <div>
+                        <span class="selected-label">SELECTED GAME</span>
+                        <h3 id="selected-title">Debug It</h3>
+                    </div>
+                </div>
+
+                <button class="start-button" id="start-button">
+                    Start challenge
+                    <span>→</span>
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- How it works -->
+        <section class="how-section" id="how-it-works">
+
+            <p class="eyebrow">HOW CODELE WORKS</p>
+
+            <h2>Small challenge.<br>Big brain energy.</h2>
+
+            <div class="steps">
+
+                <div class="step">
+                    <span class="step-number">01</span>
+                    <h3>Pick a game</h3>
+                    <p>
+                        Choose the type of coding challenge you feel like playing.
+                    </p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">02</span>
+                    <h3>Solve today's puzzle</h3>
+                    <p>
+                        Everyone gets the same challenge. You get one shot at today's score.
+                    </p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">03</span>
+                    <h3>Keep your streak</h3>
+                    <p>
+                        Come back tomorrow and see if you can beat yourself.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+
+        <div class="logo">
+            <span class="logo-mark">&lt;/&gt;</span>
+            <span>codele</span>
+        </div>
+
+        <p>
+            One coding challenge. Every day.
+        </p>
+
+        <span class="footer-year">
+            © 2026 Codele
+        </span>
+
+    </footer>
+
+
+    <script src="./script.js"></script>
+
+</body>
+</html>
