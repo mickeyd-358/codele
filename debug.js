@@ -19,7 +19,6 @@ function getToday() {
 
 const today = getToday();
 
-
 // =========================
 // QUESTION BANK
 // =========================
@@ -29,6 +28,8 @@ const questions = [
     {
         date: "2026-09-07",
         language: "JavaScript",
+        difficulty: "Easy",
+        errorType: "Logic Error",
         code: `1\tlet numbers = [2, 4, 6, 8];
 2\t
 3\tlet total = 0;
@@ -38,12 +39,23 @@ const questions = [
 7\t}
 8\t
 9\tconsole.log(total);`,
-        bugLine: 5
+
+        bugLine: 5,
+
+        explanation:
+            "The loop uses <= instead of <. This causes the loop to run one extra time because the final valid array index is numbers.length - 1.",
+
+        fix:
+            "Change <= to < so the loop stops before reaching numbers.length."
     },
+
 
     {
         date: "2026-09-08",
         language: "Python",
+        difficulty: "Easy",
+        errorType: "Logic Error",
+
         code: `1\tnumbers = [1, 2, 3, 4, 5]
 2\t
 3\ttotal = 0
@@ -52,12 +64,23 @@ const questions = [
 6\t    total += numbers
 7\t
 8\tprint(total)`,
-        bugLine: 6
+
+        bugLine: 6,
+
+        explanation:
+            "The loop stores each individual value in the variable 'number', but the code tries to add the entire 'numbers' list to total.",
+
+        fix:
+            "Change 'total += numbers' to 'total += number'."
     },
+
 
     {
         date: "2026-09-12",
         language: "JavaScript",
+        difficulty: "Easy",
+        errorType: "Logic Error",
+
         code: `1\tlet score = 10;
 2\t
 3\tif (score = 10) {
@@ -65,33 +88,66 @@ const questions = [
 5\t} else {
 6\t    console.log("Try again!");
 7\t}`,
-        bugLine: 3
+
+        bugLine: 3,
+
+        explanation:
+            "The condition uses the assignment operator = instead of the comparison operator ===. This assigns 10 to score instead of checking whether score is 10.",
+
+        fix:
+            "Change 'score = 10' to 'score === 10'."
     },
+
 
     {
         date: "2026-09-13",
         language: "Python",
+        difficulty: "Easy",
+        errorType: "Logic Error",
+
         code: `1\tdef multiply(a, b):
 2\t    result = a * b
 3\t
 4\tprint(multiply(4, 5))`,
-        bugLine: 4
+
+        bugLine: 4,
+
+        explanation:
+            "The function calculates the result but never returns it. As a result, calling multiply(4, 5) produces None.",
+
+        fix:
+            "Add 'return result' inside the function."
     },
+
 
     {
         date: "2026-09-14",
         language: "JavaScript",
+        difficulty: "Medium",
+        errorType: "Logic Error",
+
         code: `1\tlet numbers = [1, 2, 3, 4];
 2\t
 3\tlet doubled = numbers.forEach(n => n * 2);
 4\t
 5\tconsole.log(doubled);`,
-        bugLine: 3
+
+        bugLine: 3,
+
+        explanation:
+            "forEach() executes a function for every item but does not create or return a new array. The variable doubled therefore becomes undefined.",
+
+        fix:
+            "Use map() instead of forEach() when you want to create a new array."
     },
+
 
     {
         date: "2026-09-17",
         language: "JavaScript",
+        difficulty: "Medium",
+        errorType: "Logic Error",
+
         code: `1\tfunction square(number) {
 2\t    number * number;
 3\t}
@@ -99,20 +155,36 @@ const questions = [
 5\tlet result = square(5);
 6\t
 7\tconsole.log(result);`,
-        bugLine: 2
+
+        bugLine: 2,
+
+        explanation:
+            "The multiplication is calculated but the result is not returned from the function. The function therefore returns undefined.",
+
+        fix:
+            "Add 'return' before 'number * number'."
     },
+
 
     {
         date: "2026-09-18",
         language: "Python",
+        difficulty: "Easy",
+        errorType: "Runtime Error",
+
         code: `1\tcolours = ["red", "blue", "green"]
 2\t
 3\tprint(colours[3])`,
-        bugLine: 3
+        bugLine: 3,
+
+        explanation:
+            "Python lists use zero-based indexing. The list has indexes 0, 1 and 2, so index 3 does not exist.",
+
+        fix:
+            "Use a valid index such as colours[2] to access the third item."
     }
 
 ];
-
 
 // =========================
 // GET ELEMENTS FROM PAGE
