@@ -1429,3 +1429,30 @@ a {
     }
 
 }
+
+/* =========================
+   CURSOR GLOW
+========================= */
+
+.cursor-glow {
+    position: fixed;
+
+    width: 220px;
+    height: 220px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(139, 124, 255, 0.10) 0%,
+            rgba(139, 124, 255, 0.03) 35%,
+            rgba(139, 124, 255, 0) 70%
+        );
+
+    pointer-events: none;
+
+    z-index: 9999;
+
+    transform: translate(-50%, -50%);
+}

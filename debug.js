@@ -1,7 +1,6 @@
-// =========================
-// TODAY'S DATE
-// =========================
-
+// =====================================
+// TODAY'S DATE (in the user's location)
+// =====================================
 
 function getToday() {
 
@@ -20,7 +19,6 @@ function getToday() {
 
 const today = getToday();
 
-
 // =========================
 // QUESTION BANK
 // =========================
@@ -31,52 +29,159 @@ const questions = [
         date: "2026-09-07",
         language: "JavaScript",
         difficulty: "easy",
-        code: `let numbers = [1, 2, 3];
+        errorType: "Logic Error",
+        code: `1\tlet numbers = [2, 4, 6, 8];
+2\t
+3\tlet total = 0;
+4\t
+5\tfor (let i = 0; i <= numbers.length; i++) {
+6\t    total += numbers[i];
+7\t}
+8\t
+9\tconsole.log(total);`,
 
-let result = numbers.map(n => n * 2);
+        bugLine: 5,
 
-console.log(result);`,
+        explanation:
+            "The loop uses <= instead of <. This causes the loop to run one extra time because the final valid array index is numbers.length - 1.",
 
-        answer: "[2, 4, 6]"
+        fix:
+            "Change <= to < so the loop stops before reaching numbers.length."
     },
 
 
     {
         date: "2026-09-08",
         language: "Python",
-        difficulty: "hard",
-        code: `def fibonacci_recursive(n):
-    if n <= 0:
-        return 0
-    elif n == 1:
-        return 1
-    else:
-        return fibonacci_recursive(n-1) + fibonacci_recursive(n-2)
+        difficulty: "easy",
+        errorType: "Logic Error",
 
-print(fibonacci_recursive(10))`,
-        answer: "55"
+        code: `1\tnumbers = [1, 2, 3, 4, 5]
+2\t
+3\ttotal = 0
+4\t
+5\tfor number in numbers:
+6\t    total += numbers
+7\t
+8\tprint(total)`,
+
+        bugLine: 6,
+
+        explanation:
+            "The loop stores each individual value in the variable 'number', but the code tries to add the entire 'numbers' list to total.",
+
+        fix:
+            "Change 'total += numbers' to 'total += number'."
     },
 
+
     {
-        date: "2026-09-09",
+        date: "2026-09-12",
         language: "JavaScript",
         difficulty: "easy",
-        code: `let x = 5;
-let y = 3;
+        errorType: "Logic Error",
 
-console.log(x + y);`,
+        code: `1\tlet score = 10;
+2\t
+3\tif (score = 10) {
+4\t    console.log("Perfect!");
+5\t} else {
+6\t    console.log("Try again!");
+7\t}`,
 
-        answer: "8"
+        bugLine: 3,
+
+        explanation:
+            "The condition uses the assignment operator = instead of the comparison operator ===. This assigns 10 to score instead of checking whether score is 10.",
+
+        fix:
+            "Change 'score = 10' to 'score === 10'."
     },
 
-    {
-        date: "2026-09-10",
-        language: "JavaScript",
-        difficulty: "easy",
-        code: `let name = "Codele";
 
-console.log(name.length);`,
-        answer: "6"
+    {
+        date: "2026-09-13",
+        language: "Python",
+        difficulty: "easy",
+        errorType: "Logic Error",
+
+        code: `1\tdef multiply(a, b):
+2\t    result = a * b
+3\t
+4\tprint(multiply(4, 5))`,
+
+        bugLine: 4,
+
+        explanation:
+            "The function calculates the result but never returns it. As a result, calling multiply(4, 5) produces None.",
+
+        fix:
+            "Add 'return result' inside the function."
+    },
+
+
+    {
+        date: "2026-09-14",
+        language: "JavaScript",
+        difficulty: "medium",
+        errorType: "Logic Error",
+
+        code: `1\tlet numbers = [1, 2, 3, 4];
+2\t
+3\tlet doubled = numbers.forEach(n => n * 2);
+4\t
+5\tconsole.log(doubled);`,
+
+        bugLine: 3,
+
+        explanation:
+            "forEach() executes a function for every item but does not create or return a new array. The variable doubled therefore becomes undefined.",
+
+        fix:
+            "Use map() instead of forEach() when you want to create a new array."
+    },
+
+
+    {
+        date: "2026-09-17",
+        language: "JavaScript",
+        difficulty: "medium",
+        errorType: "Logic Error",
+
+        code: `1\tfunction square(number) {
+2\t    number * number;
+3\t}
+4\t
+5\tlet result = square(5);
+6\t
+7\tconsole.log(result);`,
+
+        bugLine: 2,
+
+        explanation:
+            "The multiplication is calculated but the result is not returned from the function. The function therefore returns undefined.",
+
+        fix:
+            "Add 'return' before 'number * number'."
+    },
+
+
+    {
+        date: "2026-09-18",
+        language: "Python",
+        difficulty: "easy",
+        errorType: "Runtime Error",
+
+        code: `1\tcolours = ["red", "blue", "green"]
+2\t
+3\tprint(colours[3])`,
+        bugLine: 3,
+
+        explanation:
+            "Python lists use zero-based indexing. The list has indexes 0, 1 and 2, so index 3 does not exist.",
+
+        fix:
+            "Use a valid index such as colours[2] to access the third item."
     }
 
 ];
@@ -96,6 +201,10 @@ const feedback = document.getElementById("answer-feedback");
 const attemptsDisplay = document.getElementById("attempts");
 
 const userResponses = document.querySelector(".user-responses");
+const errorType = document.getElementById("popup-error-type");
+const explanation = document.getElementById("popup-explanation");
+
+const difficulty = document.getElementById("difficulty");
 
 const popupOverlay = document.getElementById("popupOverlay");
 const popupTitle = document.getElementById("popup-title");
@@ -182,22 +291,15 @@ function addResponse(answer, correct) {
     `;
 
     if (correct) {
-
-        response.style.backgroundColor =
-            "green";
-
+        response.style.backgroundColor = "green";
     } else {
-
-        response.style.backgroundColor =
-            "red";
-
+        response.style.backgroundColor = "red";
     }
 
     userResponses.appendChild(response);
 
     return response;
 }
-
 
 // =========================
 // RESTORE RESPONSE HISTORY
@@ -207,7 +309,7 @@ function restoreResponses() {
 
     const savedAnswers =
         localStorage.getItem(
-            `output-answers-${today}`
+            `debug-answers-${today}`
         );
 
     if (!savedAnswers) {
@@ -217,13 +319,12 @@ function restoreResponses() {
     const savedUserAnswers =
         JSON.parse(savedAnswers);
 
-
     savedUserAnswers.forEach(answer => {
 
         userAnswers.push(answer);
 
         const isCorrect =
-            answer === todayQuestion.answer;
+            Number(answer) === todayQuestion.bugLine;
 
         addResponse(
             answer,
@@ -231,7 +332,6 @@ function restoreResponses() {
         );
 
     });
-
 
     attempts =
         savedUserAnswers.length;
@@ -247,56 +347,37 @@ function restoreResponses() {
 
 function checkAnswer() {
 
-    // Don't run if there is no question
-    // or the game has already finished
-
     if (!todayQuestion || solved) {
         return;
     }
 
-
-    // Get user's answer
-
     const userAnswer =
         answerInput.value.trim();
-
-
-    // Don't allow empty answers
 
     if (userAnswer === "") {
         return;
     }
-
-
-    // Increase attempts
 
     attempts++;
 
     attemptsDisplay.textContent =
         attempts;
 
-
-    // Save answer for sharing
-
     userAnswers.push(
         userAnswer
     );
 
-
-    // Save answers to localStorage
-
     localStorage.setItem(
-        `output-answers-${today}`,
+        `debug-answers-${today}`,
         JSON.stringify(userAnswers)
     );
 
-
-    // Check if answer is correct
+    // Convert input to a number
+    const answerNumber =
+        Number(userAnswer);
 
     const isCorrect =
-        userAnswer === todayQuestion.answer;
-
-    // Display answer in history
+        answerNumber === todayQuestion.bugLine;
 
     addResponse(
         userAnswer,
@@ -312,35 +393,29 @@ function checkAnswer() {
 
         solved = true;
 
-
         feedback.textContent =
             "✓ Correct!";
 
         feedback.className =
             "answer-feedback correct";
 
-
-        // Disable game
-
         answerInput.disabled = true;
 
         submitButton.disabled = true;
 
 
-        // Save today's completed game
+        // Save completion for today
 
         localStorage.setItem(
-            `output-solved-${today}`,
+            `debug-solved-${today}`,
             "true"
         );
 
         localStorage.setItem(
-            `output-attempts-${today}`,
+            `debug-attempts-${today}`,
             attempts
         );
 
-
-        // Show popup
 
         displayPopup(
             "Correct! 🎉",
@@ -371,26 +446,29 @@ function checkAnswer() {
 
             solved = true;
 
-
             feedback.textContent =
-                `✕ Out of attempts. The answer was ${todayQuestion.answer}`;
+                `✕ Out of attempts. The bug was on line ${todayQuestion.bugLine}`;
 
-            feedback.className = "answer-feedback incorrect";
-            // Disable game
+            feedback.className =
+                "answer-feedback incorrect";
 
             answerInput.disabled = true;
 
             submitButton.disabled = true;
 
 
-            // Save today's completed game
+            // Save completion for today
 
-            localStorage.setItem(`output-solved-${today}`,"true");
+            localStorage.setItem(
+                `debug-solved-${today}`,
+                "true"
+            );
 
-            localStorage.setItem(`output-attempts-${today}`,attempts);
+            localStorage.setItem(
+                `debug-attempts-${today}`,
+                attempts
+            );
 
-
-            // Show popup
 
             displayPopup(
                 "Better luck tomorrow!",
@@ -418,14 +496,15 @@ function displayPopup(message, attemptCount) {
     popupOverlay.style.display =
         "block";
 
-
     popupTitle.textContent =
         message;
-
 
     popupAttempts.textContent =
         attemptCount;
 
+    errorType.textContent = todayQuestion.errorType;
+
+    explanation.textContent = todayQuestion.explanation;
 
     popupGameNumber.textContent =
         `#${questions.indexOf(todayQuestion) + 1}`;
@@ -455,7 +534,7 @@ function generateShareText() {
         userAnswers.map(answer => {
 
             if (
-                answer === todayQuestion.answer
+                Number(answer) === todayQuestion.bugLine
             ) {
                 return "🟩";
             }
@@ -465,7 +544,7 @@ function generateShareText() {
         });
 
 
-    return `What's the Output ${gameNumber.textContent} ${attempts}/6
+    return `Debug It ${gameNumber.textContent} ${attempts}/6
 
 ${result.join("\n")}
 
@@ -503,6 +582,7 @@ async function shareResults() {
         alert(
             "Results copied to clipboard!"
         );
+
     }
 
 }
@@ -535,10 +615,13 @@ shareButton.addEventListener(
 answerInput.addEventListener(
     "keydown",
     (event) => {
+
         if (event.key === "Enter") {
+
             checkAnswer();
 
         }
+
     }
 );
 
@@ -553,26 +636,34 @@ window.onload = function () {
         return;
     }
 
-
     // Restore previous answers
-
     restoreResponses();
 
 
-    // Check if today's game is completed
     const alreadySolved =
         localStorage.getItem(
-            `output-solved-${today}`
+            `debug-solved-${today}`
         );
 
 
     if (alreadySolved === "true") {
-        const savedAttempts = localStorage.getItem(`output-attempts-${today}`);
+
+        const savedAttempts =
+            localStorage.getItem(
+                `debug-attempts-${today}`
+            );
+
         solved = true;
 
         answerInput.disabled = true;
+
         submitButton.disabled = true;
 
-        displayPopup("Completed!",savedAttempts);
+        displayPopup(
+            "Completed!",
+            savedAttempts
+        );
+
     }
+
 };

@@ -79,3 +79,37 @@ startButton.addEventListener("click", () => {
 
 // Start with Debug It selected
 gameCards[0].classList.add("selected");
+
+
+
+const cursorGlow = document.querySelector(".cursor-glow");
+
+let mouseX = 0;
+let mouseY = 0;
+
+let glowX = 0;
+let glowY = 0;
+
+
+document.addEventListener("mousemove", (event) => {
+
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+
+});
+
+
+function animateGlow() {
+
+    glowX += (mouseX - glowX) * 0.21;
+    glowY += (mouseY - glowY) * 0.21;
+
+    cursorGlow.style.left = `${glowX}px`;
+    cursorGlow.style.top = `${glowY}px`;
+
+    requestAnimationFrame(animateGlow);
+
+}
+
+
+animateGlow();

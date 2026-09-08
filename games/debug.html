@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Codele — What's the Output?</title>
+    <title>Codele — Debug It</title>
     <meta name="description" content="Play a new coding challenge every day.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -53,10 +53,10 @@
                 <span id="date">September 7, 2026</span>
             </div>
 
-            <h1>What's the Output?</h1>
+            <h1>Debug It</h1>
 
             <p class="hero-subtitle">
-                Guess what the code snippet outputs.
+                Find the bug and fix the code.
             </p>
 
         </section>
@@ -85,12 +85,11 @@
 
             </div>
 
-
             <div class="output-question">
 
-                <h2>What does this code output?</h2>
+                <h2>Which line has an error?</h2>
 
-                <p>Enter the exact output.</p>
+                <p>Enter the line number with the bug.</p>
 
                 <div class="answer-area">
 
@@ -98,7 +97,7 @@
                         type="text"
                         class="answer-input"
                         id="answer-input"
-                        placeholder="Your answer..."
+                        placeholder="Line number..."
                         autocomplete="off"
                     >
 
@@ -112,7 +111,7 @@
 
                 <div class="game-info">
                     <span>ATTEMPTS: <span id="attempts">0</span>/6</span>
-                    <span>CODELE <span id="game-number"></span></span>
+                    <span>Debug It <span id="game-number"></span></span>
                 </div>
 
             </div>
@@ -127,8 +126,11 @@
 
                 <button onclick="closePopup()">&times;</button>
                 <h2 id="popup-title"></h2>
-                <span>What's the Output <span id="popup-game-number"></span></span>
+                <span>Debug It <span id="popup-game-number"></span></span>
                 <span>ATTEMPTS: <span id="popup-attempts">0</span>/6</span>
+                <br>
+                <span>Error type: <span id="popup-error-type"></span></span>
+                <span>Explanation: <span id="popup-explanation"></span></span>
 
                 <button id="share-button" class="popup-button">Share Results</button>
                 <a href="../index.html" class="popup-button">Back to Games</a>
@@ -160,7 +162,7 @@
     </footer>
 
 
-    <script src="../output.js"></script>
+    <script src="../debug.js"></script>
 
 </body>
 </html>
