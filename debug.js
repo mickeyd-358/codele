@@ -28,7 +28,7 @@ const questions = [
     {
         date: "2026-09-07",
         language: "JavaScript",
-        difficulty: "Easy",
+        difficulty: "easy",
         errorType: "Logic Error",
         code: `1\tlet numbers = [2, 4, 6, 8];
 2\t
@@ -53,7 +53,7 @@ const questions = [
     {
         date: "2026-09-08",
         language: "Python",
-        difficulty: "Easy",
+        difficulty: "easy",
         errorType: "Logic Error",
 
         code: `1\tnumbers = [1, 2, 3, 4, 5]
@@ -78,7 +78,7 @@ const questions = [
     {
         date: "2026-09-12",
         language: "JavaScript",
-        difficulty: "Easy",
+        difficulty: "easy",
         errorType: "Logic Error",
 
         code: `1\tlet score = 10;
@@ -102,7 +102,7 @@ const questions = [
     {
         date: "2026-09-13",
         language: "Python",
-        difficulty: "Easy",
+        difficulty: "easy",
         errorType: "Logic Error",
 
         code: `1\tdef multiply(a, b):
@@ -123,7 +123,7 @@ const questions = [
     {
         date: "2026-09-14",
         language: "JavaScript",
-        difficulty: "Medium",
+        difficulty: "medium",
         errorType: "Logic Error",
 
         code: `1\tlet numbers = [1, 2, 3, 4];
@@ -145,7 +145,7 @@ const questions = [
     {
         date: "2026-09-17",
         language: "JavaScript",
-        difficulty: "Medium",
+        difficulty: "medium",
         errorType: "Logic Error",
 
         code: `1\tfunction square(number) {
@@ -169,7 +169,7 @@ const questions = [
     {
         date: "2026-09-18",
         language: "Python",
-        difficulty: "Easy",
+        difficulty: "easy",
         errorType: "Runtime Error",
 
         code: `1\tcolours = ["red", "blue", "green"]
@@ -201,6 +201,10 @@ const feedback = document.getElementById("answer-feedback");
 const attemptsDisplay = document.getElementById("attempts");
 
 const userResponses = document.querySelector(".user-responses");
+const errorType = document.getElementById("popup-error-type");
+const explanation = document.getElementById("popup-explanation");
+
+const difficulty = document.getElementById("difficulty");
 
 const popupOverlay = document.getElementById("popupOverlay");
 const popupTitle = document.getElementById("popup-title");
@@ -258,6 +262,11 @@ if (!todayQuestion) {
 
     date.textContent =
         today;
+
+    difficulty.textContent = todayQuestion.difficulty.toUpperCase();
+
+    difficulty.classList.remove("easy", "medium", "hard");
+    difficulty.classList.add(todayQuestion.difficulty);
 
     gameNumber.textContent =
         `#${questions.indexOf(todayQuestion) + 1}`;
@@ -492,6 +501,10 @@ function displayPopup(message, attemptCount) {
 
     popupAttempts.textContent =
         attemptCount;
+
+    errorType.textContent = todayQuestion.errorType;
+
+    explanation.textContent = todayQuestion.explanation;
 
     popupGameNumber.textContent =
         `#${questions.indexOf(todayQuestion) + 1}`;
