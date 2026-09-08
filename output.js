@@ -28,19 +28,23 @@ const today = getToday();
 const questions = [
 
     {
-        date: "2026-09-06",
+        date: "2026-09-07",
         language: "JavaScript",
+        difficulty: "easy",
         code: `let numbers = [1, 2, 3];
 
 let result = numbers.map(n => n * 2);
 
 console.log(result);`,
+
         answer: "[2, 4, 6]"
     },
 
+
     {
-        date: "2026-09-07",
+        date: "2026-09-08",
         language: "Python",
+        difficulty: "hard",
         code: `def fibonacci_recursive(n):
     if n <= 0:
         return 0
@@ -54,18 +58,21 @@ print(fibonacci_recursive(10))`,
     },
 
     {
-        date: "2026-09-08",
+        date: "2026-09-09",
         language: "JavaScript",
+        difficulty: "easy",
         code: `let x = 5;
 let y = 3;
 
 console.log(x + y);`,
+
         answer: "8"
     },
 
     {
-        date: "2026-09-09",
+        date: "2026-09-10",
         language: "JavaScript",
+        difficulty: "easy",
         code: `let name = "Codele";
 
 console.log(name.length);`,
@@ -73,7 +80,6 @@ console.log(name.length);`,
     }
 
 ];
-
 
 // =========================
 // GET ELEMENTS FROM PAGE
@@ -147,6 +153,11 @@ if (!todayQuestion) {
 
     date.textContent =
         today;
+
+    difficulty.textContent = todayQuestion.difficulty.toUpperCase();
+
+    difficulty.classList.remove("easy", "medium", "hard");
+    difficulty.classList.add(todayQuestion.difficulty);
 
     gameNumber.textContent =
         `#${questions.indexOf(todayQuestion) + 1}`;
