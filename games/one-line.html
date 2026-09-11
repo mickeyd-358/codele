@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Codele — One Line</title>
+    <meta name="description" content="Play a new coding challenge every day.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+    <!-- Background decoration -->
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
+    <div class="cursor-glow"></div>
+
+    <!-- Navigation -->
+    <header class="navbar">
+        <a href="#" class="logo">
+            <span class="logo-mark">&lt;/&gt;</span>
+            <span>codele</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="../index.html">Games</a>
+        </nav>
+
+        <div class="nav-right">
+            <div class="streak">
+                <span class="streak-icon">🔥</span>
+                <span id="streak-count"></span>
+            </div>
+
+            <button class="stats-button" aria-label="View statistics">
+                Stats
+            </button>
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- Hero -->
+        <section class="hero">
+
+            <div class="date-pill">
+                <span class="live-dot"></span>
+                <span id="date">September 7, 2026</span>
+            </div>
+
+            <h1>One Line</h1>
+
+            <p class="hero-subtitle">
+                Solve the challenge using one line of code.
+            </p>
+
+        </section>
+
+        <section class="output-game">
+
+            <div class="code-card">
+
+                <div class="code-header">
+                    <span class="code-language" id="code-language"></span>
+
+                    <div class="code-dots">
+                        <span class="code-dot"></span>
+                        <span class="code-dot"></span>
+                        <span class="code-dot"></span>
+                    </div>
+
+                    <span class="difficulty medium" id="difficulty">
+                        MEDIUM
+                    </span>
+                </div>
+
+                <div class="code-content">
+                    <p id="prompt"></p>
+                    <br>
+                    <pre id="starter-code"></pre>
+                    <pre id="code-content"></pre>
+                </div>
+
+            </div>
+
+            <div class="output-question">
+
+                <h2>Your solution</h2>
+
+                <p>Enter one line of code.</p>
+
+                <div class="answer-area">
+
+                    <input
+                        type="text"
+                        class="answer-input"
+                        id="answer-input"
+                        placeholder="Enter code..."
+                        autocomplete="off"
+                    >
+
+                    <button class="submit-button" id="submit-button">
+                        Submit
+                    </button>
+
+                </div>
+
+                <div class="answer-feedback" id="answer-feedback"></div>
+
+                <div class="game-info">
+                    <span>ATTEMPTS: <span id="attempts">0</span>/6</span>
+                    <span>One Line <span id="game-number"></span></span>
+                </div>
+
+            </div>
+        
+            <div class="user-responses" id="user-responses"></div>
+
+        </section>
+
+        <div class="overlay" id="popupOverlay">
+
+            <div class="popup">
+
+                <button onclick="closePopup()">&times;</button>
+                <h2 id="popup-title"></h2>
+                <span>One Line <span id="popup-game-number"></span></span>
+                <span>ATTEMPTS: <span id="popup-attempts">0</span>/6</span>
+                <br>
+                <span>Explanation: <span id="popup-explanation"></span></span>
+
+                <button id="share-button" class="popup-button">Share Results</button>
+                <a href="../index.html" class="popup-button">Back to Games</a>
+
+            </div>
+        </div>
+
+
+        
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+
+        <div class="logo">
+            <span class="logo-mark">&lt;/&gt;</span>
+            <span>codele</span>
+        </div>
+
+        <p>
+            One coding challenge. Every day.
+        </p>
+
+        <span class="footer-year">
+            © 2026 Codele
+        </span>
+
+    </footer>
+
+    <script src="../oneline.js"></script>
+    <script src="../script.js"></script>
+
+</body>
+</html>
